@@ -1,0 +1,20 @@
+## To find the prime numbers.
+
+
+find_prime <- function(n) {
+  # Return all prime numbers up to n 
+  if (n >= 2) {
+    sq <- seq(2, n)
+    primes <- c()
+    for (i in seq(2, n)) {
+      if (any(sq == i)) {
+        primes <- c(primes, i)
+        sq <- sq[(sq %% i) != 0]
+      }
+    }
+    return(primes)
+  } else {
+    ## stop stops execution of the current expression and executes an error action.
+    stop("Input value of n should be at least 2.")
+  }
+}
