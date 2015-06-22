@@ -1,0 +1,31 @@
+### extraction ph and dates
+
+func<-function()
+{
+  url<- readline(prompt = "Enter X1 value: ")
+  fun(url)
+}
+fun<-function(url)
+{
+  # load packages
+  library(RCurl)
+  library(XML)
+  library(qdapRegex)
+  html <- getURL(url, followlocation = TRUE)
+  phone<-rm_phone(html,extract=TRUE)
+  dat<-rm_date(html,extract=TRUE)
+  eml<-rm_email(html,extract=TRUE)
+  
+  # download html
+  html <- getURL(url, followlocation = TRUE)
+  
+  # parse html
+  doc = htmlParse(html, asText=TRUE)
+  #extract the text between paragraph tags "<p>" and "</p>"
+  plain.text <- xpathSApply(doc, "//p", xmlValue)
+  ##print(plain.text)
+  print(phone)
+  print(dat)
+  print(eml)
+ 
+}
