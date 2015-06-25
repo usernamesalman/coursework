@@ -56,8 +56,24 @@ matE[ abs(col(matE)-row(matE))==1 ]<-1
   sum( (1:20)^4 ) * sum( 1/(4:8) ) 
   
   ## 8 b
-  sum( (1:20)^4 ) * sum( 1/(4:103) ) 
+  
   sum( (1:20)^4 / (3 + outer(1:20,1:5,"*")))
+  
+  
   sum( (1:10)^4 / (3 + outer(1:10,1:4,"*")))
   
+  
+  
+  x <- c(" Mr. Bean bought 2 tickets 2-613-213-4567 or 5555555555 call either one",
+         "43 Butter Rd, Brossard QC K0A 3P0 - 613 213 4567",
+         "Please contact Mr. Bean (613)2134567",
+         "1.575.555.5555 is his #1 number",
+         "7164347566",
+         "I like 1234567 dogs"
+  )
+  
+  library(qdapRegex)
+  
+  rm_phone(x)
+  rm_phone(x, extract=TRUE)
   

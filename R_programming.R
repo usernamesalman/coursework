@@ -1,9 +1,14 @@
 ##Basic R commands
 library()
 library(utils)
-install.packages("utils")
-names(utils)
+## to install the pakage
+install.packages("lda")
 
+
+args
+args(remove.packages)
+## To remove the pakage
+remove.packages("RCurl","C:/Program Files/R/R-3.2.0/library")
 #Input & Output
 x<-1
 
@@ -29,24 +34,18 @@ b2<-log(1000)
 b3<-exp(log(1000))
 b4<-log2(64)
 
-##Make sure you understand different logarithmic functions.
-?log
-
 ##to find the pi value
-c1<-pi 
+## built-in constants defined 
+## in R along with their values
+
+pi 
 ##to remove the decimal value
 c2<-round(pi)
 ##to place 4 decimal value
 c3<-round(pi, digits=4)
 c4<-trunc(pi)## same as c2
 
-##Calculate of trinometric function
 
-##given c1=pi
-d1<-sin(c1) 
-d2<-cos(c1)
-d3<-sin(c1/2)
-d4<-cos(c1/2)
 
 ##Vectors - Exercise
 x <- c(3,6,8)
@@ -83,7 +82,7 @@ y[x==6]
 4:10
 
 seq(2,3,by=0.1)
-
+x<-1
 rep(x,each=4)
 
 
@@ -194,16 +193,52 @@ x<-c(1,6,NA,NaN,2)
 is.na(x) ## only for seeing na na nan
 is.nan(x) # only for seeing nan
 
-##File - uncompressed files
-
-## url - reading a URL
-
-##Exercise1:
-library(XML)
-library(RCurl)
-  Con<-url("www.economictimes.com")
 
 
-X<-readLines(Con)
 
-head(X)
+mat<-data.matrix(x)
+class(mat)
+## dataframe
+x<-data.frame(y=1:4,z=c(F,T,T,F))
+x
+nrow(x) ## number of rows
+ncol(x) ## number of columns
+
+## another example for data frame
+n = c(2, 3, 5) 
+s = c("aa", "bb", "cc") 
+b = c(TRUE, FALSE, TRUE) 
+df = data.frame(n, s, b)
+class(df) ## "data.frame"
+df_mat<-data.matrix(df)
+class(df_mat) ## "matrix"
+
+## Names Attributes
+X<-1:3
+X
+names(X)=c("Age","wt","ht")
+X
+names(X)
+
+
+read.csv(file="C:/Documents and Settings/Administrator/Desktop/task.csv")
+
+
+read.table("C:/Documents and Settings/Administrator/Desktop/LungCapData.csv", header=T)
+x<-read.table("C:/Documents and Settings/Administrator/Desktop/LungCapData.csv", header=T,sep=",")
+
+## dump() creates a file in a format that can be read with the source()
+
+dump("x",file="x.R")
+source(file="x.R")
+getwd()
+
+dput(x, file = "",
+     control = c("keepNA", "keepInteger", "showAttributes"))
+dget(file)
+
+
+
+##
+
+data()

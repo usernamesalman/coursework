@@ -1,0 +1,15 @@
+
+def highest(x,y):
+	if (x>y):
+		print("max")
+	else:
+		print("min")
+
+
+def highest(p1,p2,p3):
+    if (p1>p2) and (p1>p3):
+        return "p1"
+    if (p2>p1) and (p2>p3):
+        return "p2"
+    if (p3>p1) and (p3>p2):
+        return "p3"
