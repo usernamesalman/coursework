@@ -10,10 +10,12 @@ u<-html("https://en.wikipedia.org/?title=Python_%28programming_language%29")%>>%
 #class(l1)
 m<-rm_url(u,extract=T,clean=T)
 
-for (i in 1:length(m)){
+for (i in length(m)){
   a<-(m[!is.na(m)])
   #c<-a[which(duplicated(a))]
-  
+  print((a))
   
 }
-print(a[1])
+print(a[138])
+
+#98
