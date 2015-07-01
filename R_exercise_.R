@@ -317,3 +317,71 @@ x
 mode(x)
 data.matrix(x)
 mode(data.matrix(x))
+
+
+
+## 25/june/2015
+
+str <- c("Regular", "expression", "examples of R language")
+x <- grep("ex",str,value=T)
+x
+
+
+mynumbers <- 1:12
+matrix(mynumbers, nrow = 4) 
+
+matrix(mynumbers, nrow = 4, byrow = TRUE)
+
+## apply
+
+# Two dimensional matrix
+M <- matrix(seq(1,16), 4, 4)
+# apply max to columns
+apply(M, 2, max)
+
+# 3 dimensional array
+M <- array( seq(32), dim = c(4,4,2))
+
+# Apply sum across each M[*, , ] - i.e Sum across 2nd and 3rd dimension
+apply(M, 1, sum)
+# Result is one-dimensional
+
+# Apply sum across each M[*, *, ] - i.e Sum across 3rd dimension
+apply(M, c(1,2), sum)
+# Result is two-dimensional
+
+x <- list(a = 1, b = 1:3, c = 10:100)
+lapply(x, FUN = length)
+lapply(x, FUN = mean)
+lapply(x, FUN = max)
+lapply(x, FUN = sum)
+
+## sapply
+x <- list(a = 1, b = 1:3, c = 10:100)
+#Compare with above; a named vector, not a list 
+sapply(x, FUN = length)
+sapply(x, FUN = mean)
+sapply(x, FUN = max)
+sapply(x, FUN = sum)
+
+## vapply
+x <- list(a = 1, b = 1:3, c = 10:100)
+#Note that since the advantage here is mainly speed, this
+# example is only for illustration. We're telling R that
+# everything returned by length() should be an integer of 
+# length 1. 
+vapply(x, FUN = length, FUN.VALUE = 0L)
+
+# mapply
+
+#Sums the 1st elements, the 2nd elements, etc. 
+mapply(sum, 1:5, 1:5, 1:5)
+
+#To do rep(1,4), rep(2,3), etc.
+mapply(rep, 1:4, 4:1)
+
+Map(sum, 1:5, 1:5, 1:5)
+
+
+Sys.Date() ## today's date
+
