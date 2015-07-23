@@ -1,48 +1,41 @@
-setwd("D:/rshiny")
 
 library(shiny)
+library(datasets)
 
+# Define server logic required to summarize and view the selected
+# dataset
 shinyServer(function(input, output) {
-}
-)
-
-
-
-##
-
-setwd("D:/rshiny")
-
-library(shiny)
-
-shinyServer(function(input, output) {
-        output$myName<-renderText(input$Name)
-        output$myAge<-renderText(input$Age)
-        output$myGender<-renderText(input$Gender)
-}
-)
-
-
-
-## how to use sliderInput widgets in shiny
-
-library(shiny)
-shinyServer(function(input,output){
-        #output$out<-renderText(input$slide)
-        output$out<-renderText(
-                paste("You select the value as:",input$slide))
         
+        # Return the requested dataset
+        datasetInput <- reactive({
+                switch(input$dataset,
+                       "rock" = rock,
+                       "pressure" = pressure,
+                       "cars" = cars,
+                       "BOD"=BOD,
+                       "airquality"=airquality,
+                       "USArrests"=USArrests
+                )
+        })
+        output$caption <- renderText({
+                input$caption
+        })
+        # Generate a summary of the dataset
+        output$summary <- renderPrint({
+                dataset <- datasetInput()
+                summary(dataset)
+        })
+        
+        # Show the first "n" observations
+        output$view <- renderTable({
+                head(datasetInput(), n = input$obs)
+        })
+        ## to download the datasets
+        output$downloadData <- downloadHandler(
+                filename = function() { paste(input$dataset, '.csv', sep='') },
+                content = function(file) {
+                        write.csv(datasetInput(), file)
+                })
 })
 
-##  select input Ui widget
-
-library(shiny)
-
-shinyServer(function(input, output) {
-        output$state<-renderText(input$Statenames)
-}
-)
-
 ##
-## how to plot using renderPlot() 
-
-################################
