@@ -1,105 +1,34 @@
-#ui
-
-
-setwd("D:/rshiny")
-
-
-
 library(shiny)
 
-
+# Define UI for dataset viewer application
 shinyUI(fluidPage(
         
-        titlePanel("Hello Shiny"),
-        sidebarLayout(
-                sidebarPanel(),
-                mainPanel()
-        )
-)
-)
-##
-
-## text input shiny widgets
-library(shiny)
-
-
-shinyUI(fluidPage(
+        # Application title
+        titlePanel("Demonstration of Downloading the Datasets"),
         
-        titlePanel("widgets"),
+        # Sidebar with controls to select a dataset and specify the
+        # number of observations to view
         sidebarLayout(
-                sidebarPanel(("enter info"),
-                             textInput(inputId="Name",label="Enter Your Name",value=" "),
-                             textInput(inputId="Age",label="Enter Your Age",value=" ")),
-                mainPanel(("person information"),
-                          textOutput("myName"),
-                          textOutput("myAge")
-                )
-        )
-)
-)
-
-
-###
-## radiobuttons
-
-library(shiny)
-
-
-shinyUI(fluidPage(
+                sidebarPanel( 
+                        textInput("caption", "Caption:", "Data Summary"),
+                        selectInput("dataset", "Choose a dataset:", 
+                                    choices = c("rock", "pressure", "cars","BOD","airquality","USArrests")),
+                        downloadButton('downloadData', 'Download')
+                ),
+                numericInput("obs", "Number of observations to view:", 10)
+        ),
         
-        titlePanel("widgets"),
-        sidebarLayout(
-                sidebarPanel(
-                        ("enter information"),
-                        textInput(inputId="Name",label="Enter Your Name",value=" "),
-                        textInput(inputId="Age",label="Enter Your Age",value=" "),
-                        radioButtons("Gender","Select the Gender",list("Male","Female"))),
-                mainPanel(("person information"),
-                          textOutput("myName"),
-                          textOutput("myAge"),
-                          textOutput("myGender")
-                )
+        # Show a summary of the dataset and an HTML table with the 
+        # requested number of observations
+        mainPanel(
+                h3(textOutput("caption", container = span)),
+                verbatimTextOutput("summary"),
                 
+                tableOutput("view"),
+                tableOutput("table")
         )
 )
 )
 
-###
 
-## how to use sliderInput widgets in shiny
-
-
-library(shiny)
-
-shinyUI(fluidPage(
-        titlePanel("sliderInput widgets "),
-        sidebarLayout(
-                sidebarPanel(
-                        sliderInput(inputId="slide",label="select value from slider",min=0,max=100,value=c(20,70))#value=50 )
-                ),
-                mainPanel(
-                        textOutput("out")
-                )
-        )
-)
-)
-
-##  select input Ui widget
-
-
-library(shiny)
-
-shinyUI(fluidPage(
-        titlePanel("sliderInput widgets "),
-        sidebarLayout(
-                sidebarPanel(
-                        selectInput(inputId="Statenames",label="Select the state",c("Delhi","Bangaluru","Chennai","Patna","Tamil Nadu"),selected="Patna",selectize = T,multiple=T)
-                ),
-                mainPanel(
-                        textOutput("state")
-                )
-        )
-)
-)
-
-# how to plot using renderPlot() 
+##
